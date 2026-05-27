@@ -81,6 +81,9 @@ GRANT OWNERSHIP
   ON DBT PROJECT tasty_bytes_dbt_project 
   TO ROLE dbt_project_role;
 
+
+
+
 -- ==========================================
 -- (Optional) If NOT using OWNERSHIP, use instead:
 -- ==========================================
@@ -91,3 +94,65 @@ GRANT OWNERSHIP
 -- 8. (OPTIONAL) GRANT ROLE TO USER
 -- ==========================================
 -- GRANT ROLE dbt_project_role TO USER <dbt_user>;
+
+-- ==========================================
+-- 9. (OPTIONAL) CHANGE OWNERSHIP for ALL objects created
+-- ==========================================
+-- Use Snowflake Scripting
+BEGIN
+    -- =========================
+    -- Grant ownership on DEV schema
+    -- =========================
+
+    -- Tables in DEV
+    FOR rec IN 
+        (SELECT TABLE_NAME 
+         FROM TASTY_BYTES_DBT_DB.INFORMATION_SCHEMA.TABLES
+         WHERE TABLE_SCHEMA = 'DEV' 
+           AND TABLE_TYPE = 'BASE TABLE')
+    DO
+        EXECUTE IMMEDIATE 
+        'GRANT OWNERSHIP ON TABLE TASTY_BYTES_DBT_DB.DEV.' || rec.TABLE_NAME ||
+        ' TO ROLE DBT_PROJECT_ROLE REVOKE CURRENT GRANTS';
+    END FOR;
+
+    -- Views in DEV
+    FOR rec IN 
+        (SELECT TABLE_NAME 
+         FROM TASTY_BYTES_DBT_DB.INFORMATION_SCHEMA.VIEWS
+         WHERE TABLE_SCHEMA = 'DEV')
+    DO
+        EXECUTE IMMEDIATE 
+        'GRANT OWNERSHIP ON VIEW TASTY_BYTES_DBT_DB.DEV.' || rec.TABLE_NAME ||
+        ' TO ROLE DBT_PROJECT_ROLE REVOKE CURRENT GRANTS';
+    END FOR;
+
+
+    -- =========================
+    -- Grant ownership on RAW schema
+    -- =========================
+
+    -- Tables in RAW
+    FOR rec IN 
+        (SELECT TABLE_NAME 
+         FROM TASTY_BYTES_DBT_DB.INFORMATION_SCHEMA.TABLES
+         WHERE TABLE_SCHEMA = 'RAW' 
+           AND TABLE_TYPE = 'BASE TABLE')
+    DO
+        EXECUTE IMMEDIATE 
+        'GRANT OWNERSHIP ON TABLE TASTY_BYTES_DBT_DB.RAW.' || rec.TABLE_NAME ||
+        ' TO ROLE DBT_PROJECT_ROLE REVOKE CURRENT GRANTS';
+    END FOR;
+
+    -- Views in RAW
+    FOR rec IN 
+        (SELECT TABLE_NAME 
+         FROM TASTY_BYTES_DBT_DB.INFORMATION_SCHEMA.VIEWS
+         WHERE TABLE_SCHEMA = 'RAW')
+    DO
+        EXECUTE IMMEDIATE 
+        'GRANT OWNERSHIP ON VIEW TASTY_BYTES_DBT_DB.RAW.' || rec.TABLE_NAME ||
+        ' TO ROLE DBT_PROJECT_ROLE REVOKE CURRENT GRANTS';
+    END FOR;
+
+END;

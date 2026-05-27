@@ -1,0 +1,13 @@
+
+
+============================== 15:15:32.403710 | 91751a86-8b42-41ea-b869-c48f82232206 ==============================
+[0m15:15:32.403710 [info ] [Dummy-1   ]: Running with dbt=1.9.4
+[0m15:15:32.404867 [debug] [Dummy-1   ]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/tmp/dbt/', 'debug': 'False', 'version_check': 'True', 'log_path': '/tmp/dbt/logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': '/tmp/dbt/target/', 'invocation_command': 'dbt ', 'send_anonymous_usage_stats': 'False'}
+[0m15:15:32.405737 [error] [Dummy-1   ]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /tmp/dbt/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m15:15:32.407689 [debug] [Dummy-1   ]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.10267045, "process_in_blocks": "0", "process_kernel_time": 0.65, "process_mem_max_rss": "398388", "process_out_blocks": "0", "process_user_time": 3.85}
+[0m15:15:32.408600 [debug] [Dummy-1   ]: Command `cli run` failed at 15:15:32.408273 after 0.10 seconds
+[0m15:15:32.409214 [debug] [Dummy-1   ]: Flushing usage events
