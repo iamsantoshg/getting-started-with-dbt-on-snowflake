@@ -5,6 +5,8 @@ SHOW TABLES IN SCHEMA raw;
 -- What is the scale of data? 
 SELECT COUNT(*) FROM raw.order_header;
 
+SHOW DBT PROJECTS LIKE 'TASTY%';
+
 -- Understand a query that might be used in a mart
 SELECT 
     cl.customer_id,
