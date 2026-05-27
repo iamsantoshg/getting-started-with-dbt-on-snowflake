@@ -3,7 +3,7 @@
 -- ==========================================
 CREATE ROLE IF NOT EXISTS dbt_project_role;
 
-GRANT ROLE dbt_project_role TO USER ashutosh.uniyal@jetstar.com;
+GRANT ROLE dbt_project_role TO USER ;
 
 -- ==========================================
 -- 2. WAREHOUSE ACCESS
